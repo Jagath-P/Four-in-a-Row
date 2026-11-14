@@ -100,37 +100,15 @@ At the root, columns are tried in the order **4, 3, 5, 2, 6, 1, 7**, centre firs
 | 1 | Core engine: Human vs Agent at a fixed depth of 4 (`main.py`) | Working AI opponent |
 | 2 | Invalid input handling | Bad input no longer crashes the game |
 | 3 | Difficulty levels (Easy / Medium / Hard) via search depth | Strength can be adjusted |
-| 4 | Multiple game modes (Human / Agent for each player) | Human vs Human, Human vs Agent and Agent vs Agent all supported |
-| 5 | Fix: window list was not cleared between games | Each new game starts clean |
-| 6 | Easy depth set to 0 | Easy is now a clearly weaker, 1-ply heuristic player |
-| 7 | Agent vs Agent mode with a 1 s delay per move | AI matches can be watched move by move |
-
-### Sample Agent vs Agent Game: Easy (Green) vs Hard (Red)
-Recorded in `final_nb.ipynb`:
-
-- **Easy** greedily built a horizontal line along the bottom row (columns 2–4).
-- **Hard** blocked it at column 1, then built in the centre.
-- **Hard (Red) won in 7 moves** (14 plies total) with a diagonal ↘ from column 2 to column 5.
-
-Final board:
-
-```
-. . . . . . .
-. . . . . . .
-. R R R . . .
-. G R G . . .
-. G G R . . .
-R G G G R . .
-1 2 3 4 5 6 7
-```
-
-This shows that deeper search (5 plies) both **blocks** the opponent's threats and **sets up its own** winning lines.
+| 4 | Multiple game modes (Human / Agent for each player) | Human vs Human, Human vs Agent and Agent vs Agent are all supported |
+| 5 | Easy depth set to 0 | Easy is now a clearly weaker, 1-ply heuristic player |
+| 6 | Agent vs Agent mode with a 1 s delay per move | AI matches can be watched move by move |
 
 ---
 
 ## 4. How to Run
 
-**Requirements:** Python 3 (no external libraries).
+**Requirements:** Python 3+ (no external libraries).
 
 **Latest version (all modes and levels): `final_nb.ipynb`**
 1. Open the notebook in Jupyter or VS Code and run all cells.
@@ -138,11 +116,6 @@ This shows that deeper search (5 plies) both **blocks** the opponent's threats a
    - Player 1 / Player 2: `Human` or `Agent`
    - Agent level: `Easy`, `Medium` or `Hard`
 3. Humans enter a column number from **1 to 7**.
-
-**Original version (Human vs Agent, Hard only): `main.py`**
-```bash
-python main.py
-```
 
 > The prompts are case-sensitive: type `Human`, `Agent`, `Easy`, etc. exactly as shown.
 
@@ -161,7 +134,6 @@ Four-in-a-Row/
 
 ## 6. Limitations and Future Work
 
-- **Move ordering inside the tree:** centre-first ordering is only used at the root. Using it at every level would allow more pruning.
 - **Deterministic agents:** the same position always produces the same move. Random tie-breaking would add variety.
 - **Transposition table:** caching positions already evaluated would allow deeper search in the same time.
 - **Interface:** a graphical version (e.g. Pygame) instead of a terminal board.
